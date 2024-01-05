@@ -8,7 +8,7 @@ The first is using gorountines and the second using a simple loop.
 
 Results (1'000'000 items):
 
-| function       | exec time (ms) |
+| Function       | exec time (ms) |
 | -------------- | -------------- |
 | mapSlice       | 390.6552       |
 | simpleMapSlice | 13.5139        |
