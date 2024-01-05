@@ -1,4 +1,4 @@
-# experiment-goroutines
+# Experiment: Goroutines
 
 The experiment tests two different ways to map a slice.
 The first is using gorountines and the second using a simple loop.
