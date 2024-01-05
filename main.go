@@ -9,8 +9,8 @@ import (
 )
 
 func mapSlice[T, U any](input []T, f func(T) U) []U {
+	defer timer("mapSlice")()
 	result := make([]U, len(input))
-
 	var wg sync.WaitGroup
 	wg.Add(len(input))
 
@@ -27,6 +27,7 @@ func mapSlice[T, U any](input []T, f func(T) U) []U {
 }
 
 func simpleMapSlice[T, U any](input []T, f func(T) U) []U {
+	defer timer("simpleMapSlice")()
 	result := make([]U, len(input))
 	for i, v := range input {
 		result[i] = f(v)
@@ -34,10 +35,10 @@ func simpleMapSlice[T, U any](input []T, f func(T) U) []U {
 	return result
 }
 
-func timer() func() {
+func timer(funcName string) func() {
     start := time.Now()
     return func() {
-        fmt.Printf("Execution time: %v ", time.Since(start))
+        fmt.Printf("%s:\t%v\n", funcName, time.Since(start))
     }
 }
 
@@ -45,9 +46,8 @@ func main() {
 
 	students := model.Initialize(1000000)
 
-    defer timer()()
+	go mapSlice(students, model.ToDto)
+	go simpleMapSlice(students, model.ToDto)
 
-	//mapSlice(students, model.ToDto)
-	simpleMapSlice(students, model.ToDto)
-
+	time.Sleep(2 * time.Second)
 }
