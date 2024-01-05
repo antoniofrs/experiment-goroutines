@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/antoniofrs/experiment-goroutines/src/model"
+	"github.com/antoniofrs/experiment-goroutines/model"
 )
 
 func mapSlice[T, U any](input []T, f func(T) U) []U {
